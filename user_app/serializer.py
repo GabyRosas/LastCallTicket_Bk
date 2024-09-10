@@ -10,7 +10,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         # Le decimos cuáles son los campos de mi modelo que quiero que me estructure. Serialización de la data. Aquí
         # le decimos que queremos que serialice todos los campos
-        fields = ['username', 'email', 'password', 'user_id']
+        fields = ['username', 'email', 'password']
 
     def create(self, validated_data):
         user = User.objects.create_user(

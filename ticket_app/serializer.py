@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Ticket, Transport
 
@@ -9,13 +10,13 @@ class TransportSerializer(serializers.ModelSerializer):
 
 class TicketSerializer(serializers.ModelSerializer):
     transport = TransportSerializer()
-    username = serializers.SerializerMethodField()
     class Meta:
         model = Ticket
         fields = '__all__'
 
     def get_username(self, obj):
         return obj.user.username
+
 
     def update(self, instance, validated_data):
         # Actualiza los campos del Ticket
