@@ -10,6 +10,7 @@ class TransportSerializer(serializers.ModelSerializer):
 
 class TicketSerializer(serializers.ModelSerializer):
     transport = TransportSerializer()
+    username = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Ticket
         fields = '__all__'
