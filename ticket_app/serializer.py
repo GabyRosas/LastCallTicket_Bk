@@ -9,7 +9,7 @@ class TransportSerializer(serializers.ModelSerializer):
 
 
 class TicketSerializer(serializers.ModelSerializer):
-    transport = TransportSerializer()
+    transport = serializers.PrimaryKeyRelatedField(queryset=Transport.objects.all())
     username = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Ticket
@@ -32,12 +32,8 @@ class TicketSerializer(serializers.ModelSerializer):
         validated_data.pop('user', None)
 
         # Actualiza el campo transport si está presente en los datos validados
-        transport_data = validated_data.get('transport')
-        if transport_data:
-            transport_instance = instance.transport
-            transport_instance.transport_name = transport_data.get('transport_name', transport_instance.transport_name)
-            transport_instance.transport_type = transport_data.get('transport_type', transport_instance.transport_type)
-            transport_instance.save()
+        if 'transport' in validated_data:
+            instance.transport_id = validated_data.get('transport')
 
         instance.save()
         return instance
