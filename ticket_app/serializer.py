@@ -20,7 +20,6 @@ class TicketSerializer(serializers.ModelSerializer):
 
 
     def update(self, instance, validated_data):
-        # Actualiza los campos del Ticket
         instance.departure_place = validated_data.get('departure_place', instance.departure_place)
         instance.arrival_place = validated_data.get('arrival_place', instance.arrival_place)
         instance.departure_date = validated_data.get('departure_date', instance.departure_date)
@@ -31,7 +30,6 @@ class TicketSerializer(serializers.ModelSerializer):
 
         validated_data.pop('user', None)
 
-        # Actualiza el campo transport si está presente en los datos validados
         if 'transport' in validated_data:
             instance.transport_id = validated_data.get('transport')
 
