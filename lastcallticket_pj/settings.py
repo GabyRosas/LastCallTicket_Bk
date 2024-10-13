@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+environ.Env.read_env(Path(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -78,6 +81,9 @@ WSGI_APPLICATION = 'lastcallticket_pj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+DATABASES = {
+    'default': env.db(),  # Lee la configuración de la base de datos desde la variable DATABASE_URL en .env
+}
 
 DATABASES = {
     'default': {
