@@ -82,18 +82,7 @@ WSGI_APPLICATION = 'lastcallticket_pj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
-    'default': env.db(),  # Lee la configuración de la base de datos desde la variable DATABASE_URL en .env
-}
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lastcallticket',
-        'USER': 'postgres',
-        'PASSWORD': 'rootF5',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': env.db(),  
 }
 
 
